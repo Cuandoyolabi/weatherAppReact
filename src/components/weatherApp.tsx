@@ -1,4 +1,14 @@
-export default function weatherApp(){
-    
+import { useState } from "react";
 
+
+export default function weatherApp(){
+
+
+    const [weather, setWeather] = useState(null);
+    return <div>
+        <form>
+            
+        </form>
+        <div>Info</div>
+    </div>
 }
