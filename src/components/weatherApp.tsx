@@ -1,17 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WeatherForm from "./weatherForm";
+import WeatherMainInfo from "./weatherMainInfo";
 
-type WeatherType = {
+export type WeatherType = {
+        
     location: {
         name: string;
     };
 };
 
 export default function WeatherApp() {
-  const [weather, setWeather] = useState<WeatherType | null>(null);
+    const [weather, setWeather] = useState<WeatherType | null>(null);
 
-  async function loadInfo(city: string) {
-    
+    useEffect(() => {
+        loadInfo('London');
+    }, []);
+
+    useEffect(() => {
+        document.title = `Weather | ${weather?.location.name ?? ""}`
+    }, [weather])
+
+    async function loadInfo(city: string) {    
     try {
         const request = await fetch(`${import.meta.env.VITE_URL}?key=${import.meta.env.VITE_KEY}&q=${city}`);
         const json = await request.json();
@@ -22,19 +31,20 @@ export default function WeatherApp() {
     } catch (error) {
       console.error(error);
     }
-  }
+    }
 
   function handleChangeCity(city: string) {
     setWeather(null);
     loadInfo(city);
   }
 
-  return (
+    return (
     <div>
       <WeatherForm onChangeCity={handleChangeCity} />
       <div>{weather ? (
         <>
             <h2>{weather.location.name}</h2>
+            <WeatherMainInfo weather={weather} />
         </>
       ) : (
         <p>No hay datos todavia</p>
