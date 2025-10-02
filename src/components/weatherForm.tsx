@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function WeatherForm(){
+export default function WeatherForm(onChangeCity){
 
     const [city, setCity] = useState("");
 
@@ -14,7 +14,8 @@ export default function WeatherForm(){
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>){
         event.preventDefault();
-        console.log(city);
+        
+        onChangeCity(city);
     }
 
     return <form onSubmit={handleSubmit}>
