@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-export default function WeatherForm(onChangeCity){
+interface WeatherFromProps{
+    onChangeCity: (city: string) => void;
+}
+
+export default function WeatherForm({onChangeCity}: WeatherFromProps){
 
     const [city, setCity] = useState("");
 

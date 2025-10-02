@@ -1,27 +1,44 @@
 import { useState } from "react";
 import WeatherForm from "./weatherForm";
 
+type WeatherType = {
+    location: {
+        name: string;
+    };
+};
 
-export default function weatherApp(){
+export default function WeatherApp() {
+  const [weather, setWeather] = useState<WeatherType | null>(null);
 
-    const [weather, setWeather] = useState(null);
-
-   async  function loadInfo(city: string){
-
+  async function loadInfo(city: string) {
+    
     try {
-        const request = await fetch());
-    } catch(error){
-        console.error (error)
-    }
-    }
+        const request = await fetch(`${import.meta.env.VITE_URL}?key=${import.meta.env.VITE_KEY}&q=${city}`);
+        const json = await request.json();
+        console.log(json)
+        setWeather(json);
+        console.log(city)
 
-    function handleChangeCity(city: string){
-        setWeather(null);
-        loadInfo();
+    } catch (error) {
+      console.error(error);
     }
+  }
 
-    return <div>
-        <WeatherForm onChangeCity={handleChangeCity}/>
-        <div>Info</div>
+  function handleChangeCity(city: string) {
+    setWeather(null);
+    loadInfo(city);
+  }
+
+  return (
+    <div>
+      <WeatherForm onChangeCity={handleChangeCity} />
+      <div>{weather ? (
+        <>
+            <h2>{weather.location.name}</h2>
+        </>
+      ) : (
+        <p>No hay datos todavia</p>
+      )}</div>
     </div>
+  );
 }
