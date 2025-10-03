@@ -4,16 +4,16 @@ import WeatherMainInfo from "./weatherMainInfo";
 
 export type WeatherType = {
   
-    location: {
-        name: string;
-        region: string;
-        country: string;
-        location: string;
-    }
-    current: {
-      condition: {
-        text: string;
-        icon: string;
+  location: {
+    name: string;
+    region: string;
+    country: string;
+    localTime: string;
+  }
+  current: {
+    condition: {
+    text: string;
+    icon: string;
     }
   };
 };
@@ -48,11 +48,10 @@ export default function WeatherApp() {
   }
 
     return (
-    <div>
+    <div className="form-container">
       <WeatherForm onChangeCity={handleChangeCity} />
       <div>{weather ? (
         <>
-            <h2>{weather.location.name}</h2>
             <WeatherMainInfo weather={weather} />
         </>
       ) : (
