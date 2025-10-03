@@ -9,6 +9,8 @@ export type WeatherType = {
     region: string;
     country: string;
     localTime: string;
+    lat: number;
+    lon: number;
   }
   current: {
     condition: {

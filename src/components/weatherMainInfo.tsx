@@ -16,12 +16,13 @@ export default function WeatherMainInfo({weather}: WeatherMainInfoProps){
                     <p>{weather.location.country}</p>
                 </div>
             </div>
-
-
-                            
             <div className="weather-condition">
                 <h2>{weather.current.condition.text}</h2>
                 <img src={weather.current.condition.icon} className="weather-img" />
+            </div>
+            <div className="weather-coords">
+                <p>Latitud: {weather.location.lat}</p>
+                <p>Longitud: {weather.location.lat}</p>
             </div>
         </>
     )
