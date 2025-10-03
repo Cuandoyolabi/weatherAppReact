@@ -3,10 +3,19 @@ import WeatherForm from "./weatherForm";
 import WeatherMainInfo from "./weatherMainInfo";
 
 export type WeatherType = {
-        
+  
     location: {
         name: string;
-    };
+        region: string;
+        country: string;
+        location: string;
+    }
+    current: {
+      condition: {
+        text: string;
+        icon: string;
+    }
+  };
 };
 
 export default function WeatherApp() {
